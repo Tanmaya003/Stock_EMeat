@@ -16,3 +16,22 @@ export const signUpUser=async (req,res,next)=>{
         errorHandeller(401,'1. error in signUp')
     }
 }
+
+export const signInUser= async(req,res,next)=>{
+    const {email,password}= req.body;
+    try {
+        const validUser = await User.findOne({email})
+        if(!validUser) {
+            return errorHandeller(401,'EMail address not found')
+        } 
+        const hashedPass= bcryptjs.compareSync(password,validUser.password)
+        if(!hashedPass){
+            return errorHandeller(401,"Invalid User details")
+        }
+        const token= Jwt.sign({id:validUser._id},process.env.JWT_SECRET)
+        const {password:pass, ...rest}= validUser._doc
+        res.cookies('Access_token',token,{httpOnly:true}).status(200).json(rest)
+    } catch (error) {
+        console.log(error)
+    }
+}
