@@ -1,22 +1,28 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
+import {useSelector,useDispatch} from "react-redux"
+import { signInFailure, signInStart, signInSuccess } from "../redux/user/userSlice";
 
 export default function SignUp() {
   const [authvisibility, setVisibility] = useState(false);
   const [screenWidth, setScreenWith] = useState(window.innerWidth);
   const [formdata,setFormdata]=useState({});
   const [formdata2,setFormdata2]=useState({});
-  const [error,setError]=useState(null);
-  const [loading,setLoading]=useState(false)
+  const [errors,setError]=useState(null);
+  const [loadings,setLoading]=useState(false)
   const navigate=useNavigate();
+  const Userdata= useSelector(state=>state.user)
+  const {loading,currentUser,error}=Userdata;
+  const dispatch=useDispatch();
+
 
   const handleChange=(e)=>{
     setFormdata({...formdata, [e.target.id]:e.target.value})
   }
   const handleChange2=(e)=>{
-    setFormdata2({...formdata, [e.target.id]:e.target.value})
+    setFormdata2({...formdata2, [e.target.id]:e.target.value})
   }
-
+  
   const handleScreenSize = () => {
     setScreenWith(window.innerWidth);
   };
@@ -57,8 +63,27 @@ export default function SignUp() {
     }
   }
 
-  const handleSignIn =(e)=>{
+  const handleSignIn =async(e)=>{
     e.preventDefault();
+    try {
+      dispatch(signInStart());
+      console.log(formdata2)
+      const res= await fetch('/api/auth/signin',{
+        method:'POST',
+        headers:{'Content-type':"application/json"},
+        body:JSON.stringify(formdata2)
+      }) 
+      const data= await res.json();
+      if(data.success===false){
+        dispatch(signInFailure(data.message));
+        return;
+      }
+      dispatch(signInSuccess(data));
+      navigate('/')
+      console.log(data)
+    } catch (error) {
+      dispatch(signInFailure(error.message))
+    }
   }
   return (
     <>
@@ -124,12 +149,12 @@ export default function SignUp() {
             <div className=" h-full w-full flex flex-col gap-8">
               <div className="font-bold text-2xl">Login</div>
               <form className="flex flex-col justify-center items-start gap-5" onSubmit={handleSignIn}>
-                <label>Enter Your Username *</label>
+                <label>Enter Your Username or Email *</label>
                 <input
                   type="text"
                   placeholder="UserName"
                   onChange={handleChange2}
-                  id="username"
+                  id="userdata"
                   className="bg-slate-200 w-full rounded-md p-2 text-sm focus:outline-none"
                 />
                 <label>Enter your password *</label>
@@ -164,12 +189,12 @@ export default function SignUp() {
             <div className=" h-full w-full flex flex-col gap-8">
               <div className="font-bold text-2xl">Login</div>
               <form className="flex flex-col justify-center items-start gap-5" onSubmit={handleSignIn}>
-                <label>Enter Your Username *</label>
+                <label>Enter Your Username or Email *</label>
                 <input
                   type="text"
                   placeholder="UserName"
                   onChange={handleChange2}
-                  id="username"
+                  id="userdata"
                   className="bg-slate-200 w-4/5 rounded-md p-2 text-sm focus:outline-none"
                 />
                 <label>Enter your password *</label>

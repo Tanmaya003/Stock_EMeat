@@ -78,7 +78,7 @@ export default function Header() {
                 </button>
               </form>
               <div className="flex items-center justify-around gap-7 text-yellow-700">
-                <Link>
+                <Link to={"/profile"}>
                   <BsPersonFill />
                 </Link>
                 <Link className="hidden sm:block">
