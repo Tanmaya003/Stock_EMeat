@@ -8,7 +8,8 @@ import { FaBars } from 'react-icons/fa';
 export default function Profile() {
   const [id,setId]=useState('dashboard');
   const userdata=useSelector((state)=>state.user);
-  const {loading,currentUser,failure}=userdata 
+  const {loading,currentUser,failure}=userdata ;
+  const [handeller,setHandeller]=useState(false)
   const [hide, sethidemangaer] = useState(true);
   
   console.log(currentUser)
@@ -16,6 +17,7 @@ export default function Profile() {
   console.log(id)
   useEffect(()=>{
     if(!currentUser) {navigate('/signup')}
+    if(currentUser.usertype === 'admin' || currentUser.usertype ==='employee'){ setHandeller(true)}
   },[])
  
   const handleClick=(e)=>{
@@ -58,6 +60,7 @@ export default function Profile() {
            <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='account' onClick={handleClick}>Account</div>
            <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='wishlist' onClick={handleClick}>Wishlist</div>
            <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='logout' onClick={handleClick}>Logout</div>
+           {handeller && <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='handeller' onClick={handleClick}>HandleData</div>}
          </div>)}
         </div>
         <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='dashboard' onClick={handleClick}>Dashbord</div>
@@ -67,6 +70,7 @@ export default function Profile() {
         <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='account' onClick={handleClick}>Account details</div>
         <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='wishlist' onClick={handleClick}>Wishlist</div>
         <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='logout' onClick={handleClick}>Logout</div>
+        {handeller && <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='handeller' onClick={handleClick}>HandleData</div>}
       </section>
       <div><Outlet /></div>
       

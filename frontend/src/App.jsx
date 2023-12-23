@@ -14,6 +14,7 @@ import Dashboard from "./components/Dashboard";
 import LogoutComp from "./components/LogoutComp";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
+import Handeller from "./components/Handeller";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="account" element={<Account />} />
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="logout" element={<LogoutComp />} />
+          <Route path="handeller" element={<Handeller />} />
           </Route>
         </Route>
         <Route path="/signup" element={<SignUp />} />

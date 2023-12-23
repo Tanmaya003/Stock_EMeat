@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 
 export default function AboutUs() {
     //https://www.medallionlabs.com/wp-content/uploads/2019/07/protein-digestibility.jpg

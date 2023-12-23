@@ -28,3 +28,48 @@ export const updateUser=async(req,res,next)=>{
         next(error)
     }
 }
+
+export const promoteUser=async(req,res,next)=>{
+    
+    try {
+        console.log(" sent data is "+req.body)
+        const userid=req.body._id;
+
+        const update= await User.findByIdAndUpdate(userid , {
+            $set:{
+                usertype:'employee'
+            }
+        },{new:true})
+        res.status(200).json({ message: 'Promoted successfully' });
+    } catch (error) {
+        next(errorHandeller(404,error))
+    }
+} 
+
+export const demoteUser=async(req,res,next)=>{
+    
+    try {
+        console.log(" sent data is "+req.body)
+        const userid=req.body._id;
+
+        const update= await User.findByIdAndUpdate(userid , {
+            $set:{
+                usertype:'user'
+            }
+        },{new:true})
+        res.status(200).json({ message: 'Demoted successfully' });
+    } catch (error) {
+        next(errorHandeller(404,error))
+    }
+}
+export const searchUser=async(req,res,next)=>{
+    try {
+        const email=req.body.email;
+        console.log(email)
+        const updateduser= await User.findOne({email:email})
+        const {password:pass, ...rest}= updateduser._doc
+        res.status(200).json(rest)
+    } catch (error) {
+        next(errorHandeller(404,error))
+    }
+} 
