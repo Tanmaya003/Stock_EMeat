@@ -112,14 +112,14 @@ export default function Header() {
               <div>
                 {screenWidth > 800 ? (
                   <ul className="flex gap-4 list-none no-underline ">
-                    <Link>
+                    <Link >
                       <li className="hover:font-bold">SHOP</li>
                     </Link>
-                    <Link>
+                    <Link to='/about-us'>
                       <li className="hover:font-bold">ABOUT US</li>
                     </Link>
-                    <Link>
-                      <li className="hover:font-bold">CONTACT</li>
+                    <Link to='/contact' >
+                      <li className="hover:font-bold ">CONTACT</li>
                     </Link>
                   </ul>
                 ) : (
@@ -140,7 +140,7 @@ export default function Header() {
                       SHOP
                     </li>
                   </Link>
-                  <Link>
+                  <Link to='/about-us'>
                     <li
                       className=" shadow-md hover:font-bold hover:shadow-lg"
                       onClick={handleBox}
@@ -148,7 +148,7 @@ export default function Header() {
                       ABOUT US
                     </li>
                   </Link>
-                  <Link>
+                  <Link to='/contact'>
                     <li
                       className=" shadow-md hover:font-bold hover:shadow-lg"
                       onClick={handleBox}

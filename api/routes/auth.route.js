@@ -7,4 +7,5 @@ router.post('/signup',signUpUser)
 router.post('/signin',signInUser)
 router.get('/signout',signoutUser)
 
+
 export default router;

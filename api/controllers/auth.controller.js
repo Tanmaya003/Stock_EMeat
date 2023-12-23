@@ -19,7 +19,7 @@ export const signUpUser=async (req,res,next)=>{
 
 export const signInUser= async(req,res,next)=>{
     const {userdata,password}= req.body;
-    console.log(userdata , password)
+    // console.log(userdata , password)
     try {
         const validUser = await User.findOne({$or:[{email:userdata},{username:userdata}]})
         if(!validUser) {
@@ -46,3 +46,4 @@ export const signoutUser= async(req,res,next)=>{
         next(error)
     }
 }
+
