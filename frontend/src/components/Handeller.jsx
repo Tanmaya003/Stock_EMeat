@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, json } from "react-router-dom";
-import { promoteUserFailure, promoteUserStart } from "../redux/user/userSlice";
+
 
 export default function Handeller() {
   const userdata = useSelector((state) => state.user);
@@ -20,7 +20,9 @@ export default function Handeller() {
   }, []);
 
   useEffect(()=>{
-    searchUser()
+    if (currentUser.usertype === "admin") {
+        searchUser()
+      }
     const timeoutId = setTimeout(() => {
         setMessage('');
       }, 3000);
