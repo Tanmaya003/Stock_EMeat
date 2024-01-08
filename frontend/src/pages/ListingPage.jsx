@@ -22,12 +22,12 @@ export default function ListingPage() {
     name: "",
     description: "",
     category: "",
-    countInStock: 1,
+    
     numReviews: 1,
     rating: 0,
     reviews: "",
     weightPriceData: [
-      { weight: "500mg", price: 1000 },
+      { weight: "500mg", price: 1000 ,countInStock: 1},
     ],
   });
  
@@ -173,7 +173,7 @@ export default function ListingPage() {
             id="category"
           />
           <div className="flex gap-0 justify-center items-start">
-            <div className="flex gap-4 justify-start items-center">
+            {/* <div className="flex gap-4 justify-start items-center">
               <label className="">Enter countInStock :</label>
               <input
                 type="number"
@@ -183,7 +183,7 @@ export default function ListingPage() {
                 onChange={handleChange}
                 id="countInStock"
               />
-            </div>
+            </div> */}
             <div className="flex gap-2 justify-center items-center">
               <label className="">Enter product rating :</label>
               <input
@@ -220,6 +220,14 @@ export default function ListingPage() {
                       onChange={(e) => setwetPricedata(e, index)}
                       placeholder="product price"
                       defaultValue={data.price}
+                      className="bg-slate-200 w-full rounded-md p-2 text-sm focus:outline-none"
+                    />
+                    <input
+                      type="number"
+                      id="countInStock"
+                      onChange={(e) => setwetPricedata(e, index)}
+                      placeholder="countInStock"
+                      defaultValue={data.countInStock}
                       className="bg-slate-200 w-full rounded-md p-2 text-sm focus:outline-none"
                     />
                     <button

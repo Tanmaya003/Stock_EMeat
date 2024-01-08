@@ -17,6 +17,8 @@ import Contact from "./pages/Contact";
 import Handeller from "./components/Handeller";
 import ListingPage from "./pages/ListingPage";
 import ProductPage from "./pages/ProductPage";
+import Shop from "./pages/Shop";
+import EditProduct from "./pages/EditProduct";
 
 export default function App() {
   return (
@@ -35,10 +37,13 @@ export default function App() {
           <Route path="logout" element={<LogoutComp />} />
           <Route path="handeller" element={<Handeller />} />
           </Route>
-          <Route path="/product/list-product" element={<ListingPage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/product/edit/:id" element={<EditProduct />} />
+          
         </Route>
+        <Route path="/product/list-product" element={<ListingPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

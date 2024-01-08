@@ -1,7 +1,7 @@
 // import React from 'react'
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaSearch,
   FaShoppingCart,
@@ -14,8 +14,10 @@ import { BsPersonFill } from "react-icons/bs";
 export default function Header() {
   const [hide, sethideheader] = useState(true);
   const [screenWidth, setScreenWith] = useState(window.innerWidth);
+  const [searchTerm,setSearchTerm] =useState('');
   const [box, setbox] = useState(false);
   const [MenuBox, setMenuBox] = useState(false);
+  const navigate=useNavigate();
   let previousScroll = window.scrollY;
 
   window.onscroll = function () {
@@ -42,6 +44,19 @@ export default function Header() {
   const handleMenuBox = () => {
     setMenuBox(!MenuBox);
   };
+  const handleSearch=(e)=>{
+    e.preventDefault();
+    const urlParams= new URLSearchParams(window.location.search) //get the url
+    urlParams.set('searchTerm',searchTerm); //setting the search term
+    const searchquery= urlParams.toString(); // converting to string if any number present
+    navigate(`/shop?${searchquery}`)
+  }
+  useEffect(()=>{
+    const urlParams=new URLSearchParams(window.location.search);
+    const searchParamsinUrl=urlParams.get('searchTerm');
+    setSearchTerm(searchParamsinUrl)
+  },[location.search])
+
   return (
     <>
       <header className="z-10 top-0 left-0 w-full ">
@@ -63,17 +78,19 @@ export default function Header() {
         <div className="text-yellow-700 flex items-center justify-center  border-b-[1px] border-slate-300  text-lg w-full shadow-md ">
           <div className="py-5  max-w-screen-xl sm:py-5 sm:text-[20px] sm:w-full">
             <div className="flex flex-row justify-between items-center gap-10 mx-auto">
-              <div className="flex flex-wrap font-bold sm:text-[30px]">
+              <Link className="flex flex-wrap font-bold sm:text-[30px]" to='/'>
                 <span className="text-slate-900">Stock</span>
                 <span>EMeat</span>
-              </div>
-              <form className="bg-slate-200 p-1 gap-2 sm:p-2 sm:text-lg rounded-lg flex justify-between items-center ">
+              </Link>
+              <form className="bg-slate-200 p-1 gap-2 sm:p-2 sm:text-lg rounded-lg flex justify-between items-center " onSubmit={handleSearch}>
                 <input
                   type="text"
                   placeholder="Search.."
                   className="bg-slate-200 focus:outline-none w-24 sm:w-64"
+                  value={searchTerm}
+                  onChange={(e)=>setSearchTerm(e.target.value)}
                 />
-                <button>
+                <button type="submit">
                   <FaSearch className="text-yellow-700" />
                 </button>
               </form>
@@ -112,7 +129,7 @@ export default function Header() {
               <div>
                 {screenWidth > 800 ? (
                   <ul className="flex gap-4 list-none no-underline ">
-                    <Link >
+                    <Link to='/shop' >
                       <li className="hover:font-bold">SHOP</li>
                     </Link>
                     <Link to='/about-us'>
