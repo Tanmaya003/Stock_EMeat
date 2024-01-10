@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {  useSelector } from 'react-redux'
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { style } from '../style';
 import { FaBars } from 'react-icons/fa';
 
@@ -11,15 +11,32 @@ export default function Profile() {
   const {loading,currentUser,failure}=userdata ;
   const [handeller,setHandeller]=useState(false)
   const [hide, sethidemangaer] = useState(true);
-  
+  const location=useLocation();
+  const [lastName,setLastName]=useState('dashboard')
+
+
+  const lastWord = location.pathname.split('/').pop();
+  console.log(lastWord)
   console.log(currentUser)
   const navigate=useNavigate();
   console.log(id)
   useEffect(()=>{
     if(!currentUser) {navigate('/signup')}
     if(currentUser.usertype === 'admin' || currentUser.usertype ==='employee'){ setHandeller(true)}
+    
   },[])
  
+  useEffect(()=>{
+    const lastWord = location.pathname.split('/').pop();
+    // console.log(lastWord)
+    if(lastWord === 'profile'){
+      setLastName('dashboard')
+    }
+    else{
+      setLastName(lastWord)
+    }
+    
+  },[location])
   const handleClick=(e)=>{
     console.log(e.target.id)
     setId(e.target.id)
@@ -53,24 +70,24 @@ export default function Profile() {
           <span className='text-slate-500'>Manage</span>
          </div>
          {hide && (<div className='absolute left-5 z-1 w-[100px] text-[12px] p-2 bg-yellow-100 text-slate-500 flex flex-col gap-1' onClick={handleMenuBox}>
-           <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='dashboard' onClick={handleClick}>Dashbord</div>
-           <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='orders' onClick={handleClick}>Orders</div>
-           <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='download' onClick={handleClick}>Download</div>
-           <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='address' onClick={handleClick}>Address</div>
-           <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='account' onClick={handleClick}>Account</div>
-           <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='wishlist' onClick={handleClick}>Wishlist</div>
-           <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='logout' onClick={handleClick}>Logout</div>
-           {handeller && <div className={`${style.onActive2} shadow-md`} tabIndex='0' id='handeller' onClick={handleClick}>HandleData</div>}
+           <div className={`${style.onActive2} shadow-md ${lastName === 'dashboard'?'text-yellow-600 ':""}`} tabIndex='0' id='dashboard' onClick={handleClick}>Dashbord</div>
+           <div className={`${style.onActive2} shadow-md ${lastName === 'orders'?'text-yellow-600 ':""}`} tabIndex='0' id='orders' onClick={handleClick}>Orders</div>
+           <div className={`${style.onActive2} shadow-md ${lastName === 'download'?'text-yellow-600 ':""}`} tabIndex='0' id='download' onClick={handleClick}>Download</div>
+           <div className={`${style.onActive2} shadow-md ${lastName === 'address'?'text-yellow-600 ':""}`} tabIndex='0' id='address' onClick={handleClick}>Address</div>
+           <div className={`${style.onActive2} shadow-md ${lastName === 'account'?'text-yellow-600 ':""}`} tabIndex='0' id='account' onClick={handleClick}>Account</div>
+           <div className={`${style.onActive2} shadow-md ${lastName === 'wishlist'?'text-yellow-600 ':""}`} tabIndex='0' id='wishlist' onClick={handleClick}>Wishlist</div>
+           <div className={`${style.onActive2} shadow-md ${lastName === 'logout'?'text-yellow-600 ':""}`} tabIndex='0' id='logout' onClick={handleClick}>Logout</div>
+           {handeller && <div className={`${style.onActive2} shadow-md ${lastName === 'handeller'?'text-yellow-600 ':""}`} tabIndex='0' id='handeller' onClick={handleClick}>HandleData</div>}
          </div>)}
         </div>
-        <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='dashboard' onClick={handleClick}>Dashbord</div>
-        <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='orders' onClick={handleClick}>Orders</div>
-        <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='download' onClick={handleClick}>Download</div>
-        <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='address' onClick={handleClick}>Address</div>
-        <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='account' onClick={handleClick}>Account details</div>
-        <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='wishlist' onClick={handleClick}>Wishlist</div>
-        <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='logout' onClick={handleClick}>Logout</div>
-        {handeller && <div className={`hidden sm:block sm:${style.onActive}`} tabIndex='0' id='handeller' onClick={handleClick}>HandleData</div>}
+        <div className={`hidden sm:block sm:${style.onActive} ${lastName === 'dashboard'?'text-yellow-600 ':""}`} tabIndex='0' id='dashboard' onClick={handleClick}>Dashbord</div>
+        <div className={`hidden sm:block sm:${style.onActive} ${lastName === 'orders'?'text-yellow-600 ':""}`} tabIndex='0' id='orders' onClick={handleClick}>Orders</div>
+        <div className={`hidden sm:block sm:${style.onActive} ${lastName === 'download'?'text-yellow-600 ':""}`} tabIndex='0' id='download' onClick={handleClick}>Download</div>
+        <div className={`hidden sm:block sm:${style.onActive} ${lastName === 'address'?'text-yellow-600 ':""}`} tabIndex='0' id='address' onClick={handleClick}>Address</div>
+        <div className={`hidden sm:block sm:${style.onActive} ${lastName === 'account'?'text-yellow-600 ':""}`} tabIndex='0' id='account' onClick={handleClick}>Account details</div>
+        <div className={`hidden sm:block sm:${style.onActive} ${lastName === 'wishlist'?'text-yellow-600 ':""}`} tabIndex='0' id='wishlist' onClick={handleClick}>Wishlist</div>
+        <div className={`hidden sm:block sm:${style.onActive} ${lastName === 'logout'?'text-yellow-600 ':""}`} tabIndex='0' id='logout' onClick={handleClick}>Logout</div>
+        {handeller && <div className={`hidden sm:block sm:${style.onActive} ${lastName === 'handeller'?'text-yellow-600 ':""} `} tabIndex='0' id='handeller' onClick={handleClick}>HandleData</div>}
       </section>
       <div><Outlet /></div>
       

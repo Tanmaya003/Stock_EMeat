@@ -1,4 +1,5 @@
 
+import AddressModel from "../models/address.model.js";
 import User from "../models/user.model.js";
 import { errorHandeller } from "../utils/error.js";
 import bcryptjs from 'bcryptjs'
@@ -73,3 +74,83 @@ export const searchUser=async(req,res,next)=>{
         next(errorHandeller(404,error))
     }
 } 
+
+export const addaddress=async(req,res,next)=>{
+    try {
+        console.log(req.body)
+        const {housename,
+        country,
+        state,
+        district,
+        pin,
+        city,
+        village,
+        phone,
+        details,
+        userId}=req.body;
+        if(!req.body){
+            return next(errorHandeller(404,'Data has not been sent'))
+        }
+        const newaddress= new AddressModel({housename,
+            country,
+            state,
+            district,
+            pin,
+            city,
+            village,
+            phone,
+            details,
+            userId})
+        const address= await newaddress.save();
+        res.status(200).json(address)
+    } catch (error) {
+        next(errorHandeller(401,'error encountered'))
+    }
+}
+
+export const getaddress=async(req,res,next)=>{
+    const id=req.params.id
+    console.log(id)
+    try {
+        const data=await AddressModel.find({userId:id})
+        res.status(200).json(data)
+    } catch (error) {
+        next(errorHandeller(404,'error encountered'))
+    }
+}
+
+export const deleteAddress=async(req,res,next)=>{
+    try {
+        const listing= await AddressModel.findById(req.params.id)
+        if(!listing){
+            console.log('not found')
+      return next(errorHandeller(401,'address not found'))
+    }
+        await AddressModel.findByIdAndDelete(req.params.id)
+        res.status(200).json('Address has been removed')
+    } catch (error) {
+        next(errorHandeller(404,'Error encountered at delete part'))
+    }
+}
+
+export const updateAddress=async(req,res,next)=>{
+    try {
+        if(!req.params.id){return next(errorHandeller(401,'request Id not found'))}
+        const updateAdd= await AddressModel.findByIdAndUpdate(req.params.id,
+            {$set:{
+                housename: req.body.housename,
+                country: req.body.country,
+                state: req.body.state,
+                district: req.body.district,
+                pin: req.body.pin,
+                city:req.body.city,
+                village: req.body.village,
+                phone: req.body.phone,
+                details: req.body.details,
+                userId: req.body.userId,
+        }},{new:true})
+        res.status(200).json(updateAdd)
+    } catch (error) {
+        next(errorHandeller(404,'error in updaing address'))
+    }
+}

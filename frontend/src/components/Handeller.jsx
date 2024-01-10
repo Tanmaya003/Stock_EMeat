@@ -109,7 +109,7 @@ export default function Handeller() {
               className="bg-slate-200 w-full rounded-md p-2 text-sm focus:outline-none"
               placeholder="Enter user email id"
             />
-            <button type="button" className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            <button type="button" className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             onClick={searchUser}
             >Search</button>
             </div>
@@ -122,17 +122,20 @@ export default function Handeller() {
               ) : (
                 <div className="flex flex-col items-start justify-center gap-4">
                   <div> User found with user name :{user.username} </div>
+                  <div> User destination :{user.usertype} </div>
                   <div className="flex">
                     <div>
-                    <button type="button" className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    <button type="button"  className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                     onClick={promoteUser}
+                    
                     >Promote</button>
                     </div>
                     <div>
                       <button
                         type="button"
-                        className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                        className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                       onClick={demoteUser}
+                      
                       >
                         Demote
                       </button>
@@ -153,7 +156,7 @@ export default function Handeller() {
         </div>
         <div className="w-2/3 bg-green-200 h-20 rounded-lg p-4">Number of product registered today : 15</div>
         <Link to={'/product/reports'}>
-        <button type="button" className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Explore...</button>
+        <button type="button" className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Explore...</button>
         </Link>
       </div>
     </div>

@@ -4,6 +4,7 @@ import "rc-slider/assets/index.css";
 import showplate from "/photos/show plate 1.jpg";
 import { useNavigate } from "react-router-dom";
 import Card2 from "../components/Card2";
+import { useSelector } from "react-redux";
 
 export default function Shop() {
   const [rangeValues, setRangeValues] = useState([0, 2000]);
@@ -14,6 +15,8 @@ export default function Shop() {
     lowrange: 0,
     maxrange: 2000,
   });
+  const productCategoryData= useSelector((state)=>state.product)
+  const {loading,productCategorys,error}=productCategoryData;
   const navigate = useNavigate();
   //   console.log(rangeValues)
   // console.log(list)
@@ -36,11 +39,14 @@ export default function Shop() {
     const searchTermUrl = urlParams.get("searchTerm");
     const typeinUrl = urlParams.get("type");
     const lowrangeUrl = +urlParams.get("lowrange");
-    const maxrangeUrl = +urlParams.get("maxrange");
+    var maxrangeUrl = +urlParams.get("maxrange");
+    if(maxrangeUrl === 0){
+      maxrangeUrl=2000
+    }
     console.log(typeinUrl, searchTermUrl, lowrangeUrl, maxrangeUrl);
     if (searchTermUrl || typeinUrl || lowrangeUrl || maxrangeUrl) {
       setSearchCriteria({
-        searchTerm: searchTermUrl,
+        searchTerm: searchTermUrl || '',
         type: typeinUrl || "",
         lowrange: lowrangeUrl || 0,
         maxrange: maxrangeUrl || 2000,
@@ -91,8 +97,23 @@ export default function Shop() {
             <div className="text-slate-700 uppercase text-lg ">
               Product categories
             </div>
+            
             <div className="text-slate-600 flex flex-col  justify-start items-start">
-              <button
+            {productCategorys.map((data,index)=>{
+              return(
+                <button
+                onClick={(e) => setType(e.target.id)}
+                id={data.categories}
+                key={index}
+                className={`cursor-pointer hover:text-yellow-600  ${
+                  searchCriteria.type === data.categories ? "text-yellow-600" : ""
+                } `}
+              >
+                {data.categories}
+              </button>
+              )
+            })}
+              {/* <button
                 onClick={(e) => setType(e.target.id)}
                 id="mutton"
                 className={`cursor-pointer hover:text-yellow-600  ${
@@ -136,7 +157,7 @@ export default function Shop() {
                 } `}
               >
                 Egg
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="w-full h-20  flex flex-col gap-4">
@@ -175,7 +196,7 @@ export default function Shop() {
             className="object-contain w-full "
           />
         </div>
-        <div className="flex gap-3 p-3 flex-wrap">
+        <div className="flex gap-0 py-3 flex-wrap">
         {list.map((data,index)=>{
             return(
                 <Card2 data={data} key={index} />

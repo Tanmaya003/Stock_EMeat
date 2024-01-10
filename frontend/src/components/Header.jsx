@@ -128,16 +128,16 @@ export default function Header() {
               {/* <div>   x    </div> */}
               <div>
                 {screenWidth > 800 ? (
-                  <ul className="flex gap-4 list-none no-underline ">
-                    <Link to='/shop' >
-                      <li className="hover:font-bold">SHOP</li>
-                    </Link>
-                    <Link to='/about-us'>
-                      <li className="hover:font-bold">ABOUT US</li>
-                    </Link>
-                    <Link to='/contact' >
-                      <li className="hover:font-bold ">CONTACT</li>
-                    </Link>
+                  <ul className="flex gap-1 list-none no-underline ">
+                  <div className="w-28  text-end"><Link to='/shop' >
+                      <li className="hover:font-bold hover:transform">SHOP</li>
+                    </Link></div>
+                  <div className="w-28 text-center"><Link to='/about-us'>
+                      <li className="hover:font-bold hover:transform">ABOUT US</li>
+                    </Link></div>
+                  <div className="w-28 text-start"><Link to='/contact' >
+                      <li className="hover:font-bold hover:transform">CONTACT</li>
+                    </Link></div>
                   </ul>
                 ) : (
                   <div>
@@ -149,30 +149,30 @@ export default function Header() {
             {box && screenWidth < 800 && (
               <div className="h-[120px]  absolute top-[120px] right-5 w-[100px] shadow-md bg-transparent">
                 <ul className="flex flex-col gap-4 list-none no-underline p-1 cursor-pointer">
-                  <Link>
+                <div className=""><Link>
                     <li
-                      className=" shadow-md hover:font-bold hover:shadow-lg"
+                      className=" shadow-md hover:font-bold hover:shadow-lg "
                       onClick={handleBox}
                     >
                       SHOP
                     </li>
-                  </Link>
-                  <Link to='/about-us'>
+                  </Link> </div>
+                <div> <Link to='/about-us'>
                     <li
                       className=" shadow-md hover:font-bold hover:shadow-lg"
                       onClick={handleBox}
                     >
                       ABOUT US
                     </li>
-                  </Link>
-                  <Link to='/contact'>
+                  </Link></div>
+                <div><Link to='/contact'>
                     <li
                       className=" shadow-md hover:font-bold hover:shadow-lg"
                       onClick={handleBox}
                     >
                       CONTACT
                     </li>
-                  </Link>
+                  </Link> </div>
                 </ul>
               </div>
             )}
