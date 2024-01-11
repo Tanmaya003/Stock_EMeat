@@ -19,6 +19,7 @@ import ListingPage from "./pages/ListingPage";
 import ProductPage from "./pages/ProductPage";
 import Shop from "./pages/Shop";
 import EditProduct from "./pages/EditProduct";
+import Cart from "./pages/Cart";
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="handeller" element={<Handeller />} />
           </Route>
           <Route path="/product/edit/:id" element={<EditProduct />} />
+          <Route path="/cart" element={<Cart />} />
           
         </Route>
         <Route path="/product/list-product" element={<ListingPage />} />

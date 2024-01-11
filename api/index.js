@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import authrouter from './routes/auth.route.js'
 import userRouter from './routes/user.route.js'
 import productRouter from './routes/product.route.js'
+import cartRouter from './routes/cart.route.js'
 dotenv.config();
 //creating dynamic directory name kjkj
 const __dirname =path.resolve();
@@ -22,3 +23,4 @@ app.listen(3000, ()=>{console.log('server is running on port 3000') })
 app.use('/api/auth',authrouter)
 app.use('/api/user',userRouter)
 app.use('/api/product',productRouter)
+app.use('/api/cart',cartRouter)

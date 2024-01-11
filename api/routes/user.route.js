@@ -1,5 +1,5 @@
 import express from "express";
-import {  addaddress, deleteAddress, demoteUser, getaddress, promoteUser, searchUser, test, updateAddress, updateUser } from "../controllers/user.controllers.js";
+import {  addWishlist, addaddress, deleteAddress, deleteWishlist, demoteUser, getWishlist, getWishlists, getaddress, promoteUser, searchUser, test, updateAddress, updateUser } from "../controllers/user.controllers.js";
 import { validUser } from "../utils/verifyUser.js";
 
 
@@ -13,6 +13,9 @@ router.post('/addAddress',validUser, addaddress)
 router.get('/getAddress/:id',validUser, getaddress)
 router.delete('/deleteAddress/:id',validUser, deleteAddress)
 router.post('/updateAddress/:id',validUser, updateAddress)
-
+router.post('/addWishlist',validUser, addWishlist)
+router.get('/getWishlist',validUser, getWishlist)
+router.delete('/deleteWishlist/:id',validUser, deleteWishlist)
+router.get('/getWishlists/:id',validUser, getWishlists)
 
 export default router;
