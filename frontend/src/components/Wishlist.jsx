@@ -53,10 +53,10 @@ export default function Wishlist() {
           return (
             <>
               <div className="w-[400px] border-[0.5px] border-gray-400 rounded-md h-40 overflow-hidden flex ">
-                <div className="w-1/2 h-full overflow-hidden object-center">
+                <div className="w-1/2 h-full overflow-hidden ">
                   <img
                     src={details.image}
-                    className=" overflow-hidden object-center "
+                    className=" overflow-hidden object-fill "
                   />
                 </div>
                 <div className="p-2 py-4 w- flex flex-col gap-10 justify-center items-start">

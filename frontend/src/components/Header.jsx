@@ -10,6 +10,7 @@ import {
   FaAngleDown,
 } from "react-icons/fa";
 import { BsPersonFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 export default function Header() {
   const [hide, sethideheader] = useState(true);
@@ -18,6 +19,13 @@ export default function Header() {
   const [box, setbox] = useState(false);
   const [MenuBox, setMenuBox] = useState(false);
   const navigate=useNavigate();
+  const [cartValue,setValue]= useState({
+    totalAmounts: 0,
+    totalNumber:0
+  })
+  const cartdetail= useSelector((state)=>state.cart)
+  const {loading,cart,error}=cartdetail;
+  console.log(cart)
   let previousScroll = window.scrollY;
 
   window.onscroll = function () {
@@ -101,14 +109,14 @@ export default function Header() {
                 <Link className="hidden sm:block">
                   <div className="flex flex-row items-center ">
                     <FaRupeeSign />
-                    <span>0.0</span>
+                    <span>{cart.totalAmount}</span>
                   </div>
                 </Link>
-                <Link className="hidden sm:block">
+                <Link to={'/cart'} className="hidden sm:block">
                   <div className="flex items-center">
                     <FaShoppingCart />
                     <sup className="w-5  h-5 border rounded  bg-yellow-700 text-slate-50 text-center text-sm">
-                      3
+                      {cart.totalNum}
                     </sup>
                   </div>
                 </Link>
