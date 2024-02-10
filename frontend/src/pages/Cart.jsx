@@ -2,12 +2,14 @@ import React, { useEffect, useMemo, useState } from "react";
 import { FaRupeeSign } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { storeCartFail, storeCartStart, storeCartSuccess } from "../redux/user/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
     const [load,setLoading]=useState(true)
     const disPatch=useDispatch();
     const [toogle,setToggle]=useState(false)
     const [toogle2,setToggle2]=useState(false)
+    const navigate=useNavigate();
   const [details, setDetails] = useState({
     item: [
       {
@@ -19,14 +21,20 @@ export default function Cart() {
         userId: "",
         countNo: 1,
         cartId: "",
+        
       },
     ],
     totalNum: 0,
     totalAmount: 0,
+    address:[],
   });
   const userData = useSelector((state) => state.user);
   const { loading, currentUser, failure } = userData;
-  console.log(details);
+  console.log("current user is"+currentUser._id);
+  // const cartdetail= useSelector((state)=>state.cart)
+  // const {cart}=cartdetail;
+  // console.log(cart.item)
+  // console.log(details.item);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,10 +55,12 @@ export default function Cart() {
         console.log(totalamount);
 
         const totalno = data.length;
+        console.log(totalno)
 
         setDetails({
           totalNum: totalno,
           totalAmount: totalamount,
+          address:[],
           item: data.map((detail) => ({
             productId: detail.items[0].productId,
             name: detail.items[0].name,
@@ -60,6 +70,7 @@ export default function Cart() {
             userId: detail.userId,
             countNo: detail.items[0].countNo,
             cartId: detail._id,
+            
           })),
         });
         setLoading(false)
@@ -75,8 +86,11 @@ export default function Cart() {
               userId: detail.userId,
               countNo: detail.items[0].countNo,
               cartId: detail._id,
+              
             })),
+            address:[]
           }
+          console.log(values)
           disPatch(storeCartSuccess(values))
       } catch (error) {
         console.log(error);
@@ -141,6 +155,9 @@ export default function Cart() {
     } catch (error) {
         console.log(error)
     }
+  }
+  const gotocheckout=()=>{
+    navigate('/checkout')
   }
   return (
     <div>
@@ -208,6 +225,7 @@ export default function Cart() {
         <div>
           <button
             type="submit"
+            onClick={gotocheckout}
             className="text-yellow-800 text-md bg-gradient-to-r from-yellow-500 via-yellow-500 to-yellow-500 hover:bg-gradient-to-br hover:scale-110  font-medium rounded-lg  px-5 py-2 text-center me-2 mb-autp"
           >
             Proceed to Order

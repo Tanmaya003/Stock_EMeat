@@ -15,15 +15,23 @@ const cartSlice=createSlice({
         },
         storeCartSuccess:(state,action)=>{
             state.loading=false;
-            state.cart=action.payload;
+            // console.log(...action.payload)
+            state.cart=action.payload ;
             state.error=null
+        },
+        upadteCartSuccess:(state,action)=>{
+            
+            state.cart={...state.cart , address:action.payload}
         },
         storeCartFail:(state,action)=>{
             state.loading=false;
             state.error=action.payload
+        },
+        deleteCartstore:(state,action)=>{
+            state.cart=null;
         }}
     }
 )
 
-export const {storeCartStart,storeCartSuccess,storeCartFail} = cartSlice.actions;
+export const {storeCartStart,storeCartSuccess,storeCartFail,deleteCartstore,upadteCartSuccess} = cartSlice.actions;
 export default cartSlice.reducer;

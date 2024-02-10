@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { signOutUserFailure, signOutUserStart, signOutUserSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { deleteCartstore } from '../redux/user/cartSlice';
 
 export default function LogoutComp() {
     const dispatch=useDispatch();
@@ -17,7 +18,7 @@ export default function LogoutComp() {
         }
         navigate('/signup')
         dispatch(signOutUserSuccess(data))
-        
+        dispatch(deleteCartstore())
         } catch (error) {
           dispatch(signOutUserFailure(error.message))
         }

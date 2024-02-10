@@ -24,6 +24,7 @@ app.use('/api/auth',authrouter)
 app.use('/api/user',userRouter)
 app.use('/api/product',productRouter)
 app.use('/api/cart',cartRouter)
+app.use('/api/payment',cartRouter)
 
 
 //below middleware is most important to catch the error

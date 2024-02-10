@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 export default function Dashboard() {
   const userdata=useSelector((state)=>state.user);
   const {loading,currentUser,failure}=userdata 
+  // console.log(currentUser)
   return (
     <div className='text-start font-md'>
         Hello {currentUser.username} <br />

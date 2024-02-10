@@ -20,6 +20,10 @@ import ProductPage from "./pages/ProductPage";
 import Shop from "./pages/Shop";
 import EditProduct from "./pages/EditProduct";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import PaymentPage from "./pages/PaymentPage";
+import PaymentFail from "./components/PaymentFail";
+import PaymentSuccess from "./components/PaymentSuccess";
 
 export default function App() {
   return (
@@ -40,6 +44,10 @@ export default function App() {
           </Route>
           <Route path="/product/edit/:id" element={<EditProduct />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/paymentfail" element={<PaymentFail />} />
+          <Route path="/paymentSuccess" element={<PaymentSuccess />} />
           
         </Route>
         <Route path="/product/list-product" element={<ListingPage />} />
