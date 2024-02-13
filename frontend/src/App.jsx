@@ -47,7 +47,7 @@ export default function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/paymentfail" element={<PaymentFail />} />
-          <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+          <Route path="/paymentSuccess/:trasanctionId" element={<PaymentSuccess />} />
           
         </Route>
         <Route path="/product/list-product" element={<ListingPage />} />

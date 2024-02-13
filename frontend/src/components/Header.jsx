@@ -25,7 +25,7 @@ export default function Header() {
   });
   const cartdetail = useSelector((state) => state.cart);
   const { loading, cart, error } = cartdetail;
-  console.log(cart);
+  // console.log(cart);
   const userData = useSelector((state) => state.user);
   const { currentUser } = userData;
   console.log(currentUser)

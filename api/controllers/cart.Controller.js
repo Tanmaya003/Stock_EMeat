@@ -103,3 +103,21 @@ export const deleteCartData = async (req, res, next) => {
     next(errorHandeller(401, "Error in delete"));
   }
 };
+
+export const deleteCart = async (req, res, next) => {
+  try {
+    console.log(req.params.id);
+    
+    const existData = await CartDB.findOne({userId:req.params.id});
+    if (!existData) return next(errorHandeller(404, "Resource not found"));
+    console.log(existData)
+
+    const deleteData = await CartDB.deleteMany({userId:req.params.id});
+    if (!deleteData) {
+      return next(errorHandeller(500, "Error deleting item"));
+    }
+    res.status(200).json({message:"Cart deleted"});
+  } catch (error) {
+    next(errorHandeller(401, "Error in delete"));
+  }
+};

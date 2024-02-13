@@ -12,7 +12,7 @@ export default function Checkout() {
   const [toggle, setToggle] = useState(false);
   const cartDetails = useSelector((state) => state.cart);
   const { cart } = cartDetails;
-  console.log(cart);
+  console.log(cart.item[0].productId);
   const userDetails = useSelector((state) => state.user);
   const { currentUser } = userDetails;
 //   console.log(currentUser);

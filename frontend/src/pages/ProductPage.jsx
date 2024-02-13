@@ -46,7 +46,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
   // console.log(details);
   // console.log(userdetails);
-  // console.log(params.id);
+  console.log(params.id);
   console.log(wishdetails);
   useEffect(() => {
     // console.log(params.id);
